@@ -28,6 +28,7 @@
     "mongoose-paginate": "^5.0.3",
     "mongoose-text-search": "0.0.2",
     "morgan": "1.9.1",
+    "pusher": "^3.0.0",
     "request": "2.85.0",
     "request-promise": "4.2.2",
     "restify": "6.3.4",

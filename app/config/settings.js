@@ -26,11 +26,13 @@ module.exports = {
     queryLimit: process.env.MONGODB_QUERY_LIMIT,
     questionLimit: process.env.QUESTION_LIMIT
   },
-  jwt: {
-    expiresIn: process.env.JWTEXPIRESIN,
-    secret: process.env.JWTSECRET,
-  },
-  sendGrid: {
-    apikey: process.env.SENDGRID_API_KEY
+  pusher: {
+    appId: process.env.PUSHER_APP_ID,
+    key: process.env.PUSHER_KEY,
+    secret: process.env.PUSHER_SECRET,
+    cluster: process.env.PUSHER_CLUSTER,
+    encrypted: process.env.PUSHER_ENCRYPTED,
+    channel: 'hardware-channel',
+    event: 'trigger-event'
   }
 };

@@ -2,13 +2,19 @@
  * Created by Morifeoluwa on 02/01/2020.
  * objective: building to scale
  */
-const sgMail = require('@sendgrid/mail');
 const MongoDBHelper = require('../lib/mongoDBHelper');
-const HardwareModel = require('../models/user.model');
+const HardwareModel = require('../models/hardware.model');
 const config = require('../config/settings');
+const Pusher = require('pusher');
 
 
-sgMail.setApiKey(config.sendGrid.apikey);
+const pusher = new Pusher({
+  appId: config.pusher.appId,
+  key: config.pusher.key,
+  secret: config.pusher.secret,
+  cluster: config.pusher.cluster,
+  encrypted: config.pusher.encrypted
+});
 
 class Hardware {
   /**
@@ -20,29 +26,20 @@ class Hardware {
     this.mongo = new MongoDBHelper(mongoClient, HardwareModel);
   }
 
-  getUser(data) {
+  getRecord(data) {
     return this.mongo.getOneUser(data);
   }
 
-  createUser(data) {
+  createRecord(data) {
     this.logger.info('inserting record into DB');
     return this.mongo.save(data);
   }
 
-  search(query) {
-    return this.mongo.search(query);
-  }
-
-  sendNotification(email, data) {
-    this.logger.info('sending notification to user');
-    const msg = {
-      to: email,
-      from: 'test@example.com',
-      subject: 'Your Question Has Received an Answer',
-      text: `Someone posted the answer: ${data}`,
-      html: `Someone posted the answer: <strong>${data}</strong>`,
-    };
-    sgMail.send(msg);
+  sendNotification(data) {
+    this.logger.info('sending notification to dashboard');
+    pusher.trigger(config.pusher.channel, config.pusher.event, {
+      message: data
+    });
   }
 }
 

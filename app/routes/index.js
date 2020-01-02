@@ -1,10 +1,9 @@
 /**
- * Created by Morifeoluwa on 18/11/2019.
+ * Created by Morifeoluwa on 02/01/2020.
  * objective: building to scale
  */
 const swaggerUi = require('swagger-ui-restify');
 const swaggerDocument = require('../swagger.json');
-const { verifyToken } = require('../lib/jwtHelper');
 
 const routes = function routes(server, serviceLocator) {
   const hardwareHandler = serviceLocator.get('hardwareController');
@@ -25,12 +24,12 @@ const routes = function routes(server, serviceLocator) {
 
 
   /**
-   * LOGIN
+   * RECIEVE REQUEST
    */
   server.post({
-    path: '/login',
+    path: '/notify',
     name: 'recieves request from an hardware device',
-  }, (req, res, next) => hardwareHandler.login(req, res, next));
+  }, (req, res, next) => hardwareHandler.notify(req, res, next));
 };
 
 module.exports = routes;
