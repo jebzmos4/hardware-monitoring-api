@@ -40,7 +40,5 @@ const HardwareSchema = new Schema(
 );
 
 HardwareSchema.plugin(mongoosePaginate);
-
-HardwareSchema.index({ '$**': 'text' });
 const hardwareModel = mongoose.model(config.mongo.collections.hardware, HardwareSchema);
 module.exports = hardwareModel;

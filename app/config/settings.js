@@ -21,7 +21,7 @@ module.exports = {
       dbProd: process.env.MONGODB_DATABASE_NAME
     },
     collections: {
-      hardware: 'Hardwares'
+      hardware: 'Hardware-request-details'
     },
     queryLimit: process.env.MONGODB_QUERY_LIMIT,
     questionLimit: process.env.QUESTION_LIMIT
