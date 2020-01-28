@@ -21,7 +21,7 @@ module.exports = {
       dbProd: process.env.MONGODB_DATABASE_NAME
     },
     collections: {
-      hardware: 'Hardware-request-details'
+      hardware: 'hardware-monitoring-api'
     },
     queryLimit: process.env.MONGODB_QUERY_LIMIT,
     questionLimit: process.env.QUESTION_LIMIT
@@ -34,5 +34,8 @@ module.exports = {
     encrypted: process.env.PUSHER_ENCRYPTED,
     channel: 'hardware-channel',
     event: 'trigger-event'
+  },
+  sendGrid: {
+    apiKey: process.env.SENDGRID_API_KEY
   }
 };

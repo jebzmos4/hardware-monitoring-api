@@ -6,7 +6,9 @@ const MongoDBHelper = require('../lib/mongoDBHelper');
 const HardwareModel = require('../models/hardware.model');
 const config = require('../config/settings');
 const Pusher = require('pusher');
+const sgMail = require('@sendgrid/mail');
 
+sgMail.setApiKey(config.sendGrid.apiKey);
 
 const pusher = new Pusher({
   appId: config.pusher.appId,
@@ -27,7 +29,9 @@ class Hardware {
   }
 
   getRecord(data) {
-    return this.mongo.getOneUser(data);
+    if (data.device_id) {
+      return this.mongo.getOne(data);
+    } console.log('got here'); return this.mongo.getBulk();
   }
 
   createRecord(data) {
@@ -40,6 +44,23 @@ class Hardware {
     pusher.trigger(config.pusher.channel, config.pusher.event, {
       message: data
     });
+  }
+
+  sendEmail(email, message) {
+    this.logger.info('Sending email verification to user');
+    try {
+      const msg = {
+        to: email,
+        from: 'test@example.com',
+        subject: 'Low Battery Notification',
+        text: message,
+        html: `Device needs attention: <strong>${message}</strong>`,
+      };
+      return sgMail.send(msg)
+        .then(resp => resp[0].statusCode).catch(err => err.response.body.errors);
+    } catch (error) {
+      return error;
+    }
   }
 }
 

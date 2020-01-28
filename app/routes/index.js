@@ -30,6 +30,38 @@ const routes = function routes(server, serviceLocator) {
     path: '/notify',
     name: 'recieves request from an hardware device',
   }, (req, res, next) => hardwareHandler.notify(req, res, next));
+
+  /**
+   * RECIEVE REQUEST
+   */
+  server.get({
+    path: '/fetch',
+    name: 'fetches request data for hardware device(s)',
+  }, (req, res, next) => hardwareHandler.fetch(req, res, next));
+
+  /**
+   * RECIEVE REQUEST
+   */
+  server.post({
+    path: '/schedule',
+    name: 'creates schedule request for an hardware device',
+  }, (req, res, next) => hardwareHandler.createSchedule(req, res, next));
+
+  /**
+   * RECIEVE REQUEST
+   */
+  server.get({
+    path: '/schedule',
+    name: 'fetches schedule request for an hardware device',
+  }, (req, res, next) => hardwareHandler.fetchSchedule(req, res, next));
+
+  /**
+   * ADD A USER
+   */
+  server.post({
+    path: '/signup',
+    name: 'allows admin to create a new user',
+  }, (req, res, next) => hardwareHandler.signUp(req, res, next));
 };
 
 module.exports = routes;

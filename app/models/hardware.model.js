@@ -10,7 +10,7 @@ const { Schema } = mongoose;
 
 const HardwareSchema = new Schema(
   {
-    id: {
+    device_id: {
       type: String,
       required: true,
       trim: true,

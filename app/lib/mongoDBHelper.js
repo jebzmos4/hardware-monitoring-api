@@ -28,9 +28,11 @@ class MongoDBHelper {
    * @returns {Promise}
    */
   save(data) {
+    console.log(data);
     return new Promise((resolve, reject) => {
-      const mongodbSaveSchema = this.MongoDBModel(data);
+      const mongodbSaveSchema = this.MongoDBModel({ device_id: data.device_id, data });
       return mongodbSaveSchema.save((error, result) => {
+        console.log(error);
         if (error != null) {
           return reject(MongoDBHelper.handleError(error));
         }
@@ -66,7 +68,7 @@ class MongoDBHelper {
     ));
   }
 
-  getOneUser(params) {
+  getOne(params) {
     return new Promise((resolve, reject) => {
       const query = this.MongoDBModel.findOne(params);
       if (params.fields) {
@@ -82,82 +84,21 @@ class MongoDBHelper {
     });
   }
 
-  askQuestion(data) {
-    return new Promise((resolve, reject) => this.MongoDBModel.findOne({ email: data.email })
-      .then((response) => {
-        const questions = new this.QuestionModel({
-          owner: response._id,
-          question: data.question
-        });
-        questions.save()
-          .then(saved => this.MongoDBModel
-            .update({ _id: response._id }, { $push: { questions: { id: saved._id } } })
-            .then(question => resolve(question)))
-          .catch(error => reject(error));
-      })
-      .catch(err => reject(err)));
-  }
-
-  getQuestions(param) {
+  /**
+   * Fetches bulk records from the connected MongoDB instance.
+   *
+   * @param params
+   * @returns {Promise}
+   */
+  getBulk() {
     return new Promise((resolve, reject) => {
-      this.QuestionModel.find(param)
-        .populate('owner', ['email'])
-        .exec((error, questions) => {
-          if (error) {
-            return reject(error);
-          }
-          return resolve(questions);
-        });
-    });
-  }
-
-  getQuestionsByEmail(param) {
-    return new Promise((resolve, reject) => {
-      this.MongoDBModel.find(param)
-        .populate('questions.id')
-        .exec((error, questions) => {
-          const data = [];
-          questions.forEach((question) => { data.push(question.questions); });
-          if (error) {
-            return reject(error);
-          }
-          return resolve(data);
-        });
-    });
-  }
-
-  answerQuestion(data) {
-    return new Promise((resolve, reject) => {
-      this.QuestionModel.updateOne(
-        { _id: data.questionId },
-        { $push: { answers: data } },
-        (err, response) => {
-          if (err) return reject(err);
-          return resolve(response);
+      const query = this.MongoDBModel.find();
+      return query.exec((error, modelData) => {
+        if (error) {
+          return reject(this.handleError(error));
         }
-      );
-    });
-  }
-
-  voteAnswer(data) {
-    return new Promise((resolve, reject) => {
-      this.QuestionModel.updateOne({ 'answers._id': data.answerId }, { $inc: data.vote }, (err, data) => {
-        if (err) return reject(err);
-        return resolve(data);
+        return resolve(modelData);
       });
-    });
-  }
-
-  voteQuestion(data) {
-    return new Promise((resolve, reject) => {
-      this.QuestionModel.update(
-        { _id: data.questionId },
-        { $inc: data.vote },
-        (err, response) => {
-          if (err) return reject(err);
-          return resolve(response);
-        }
-      );
     });
   }
 

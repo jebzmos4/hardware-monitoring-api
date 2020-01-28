@@ -65,7 +65,6 @@ serviceLocator.register('mongo', (servicelocator) => {
   return mongo;
 });
 
-
 /**
  * Creates an instance of the Hardware Service
  */
