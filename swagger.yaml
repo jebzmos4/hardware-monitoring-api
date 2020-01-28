@@ -1,0 +1,458 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "PowerCube",
+    "description": "TODO: Add Description",
+    "contact": {}
+  },
+  "host": "https://hardware-monitoring-api.herokuapp.com",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/fetch": {
+      "get": {
+        "description": "",
+        "summary": "FETCH ALL HARDWARE POST REQUEST",
+        "operationId": "FETCHALLHARDWAREPOSTREQUEST",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/FETCHALLHARDWAREPOSTREQUEST"
+            },
+            "examples": {
+              "application/json": {
+                "error": false,
+                "code": 200,
+                "message": "",
+                "response": [
+                  {
+                    "_id": "5e2fe1a9490973602066b023",
+                    "device_id": "abc123",
+                    "name": "abcdef",
+                    "loc": "abcdef",
+                    "stat": {
+                      "opm": "0/1/2",
+                      "bat": "99",
+                      "opv": "220",
+                      "opp": "9999",
+                      "opc": "45.45",
+                      "chc": "888"
+                    },
+                    "time": "Wednesday 01.02.2020 -- 10:10:10",
+                    "__v": 0,
+                    "updatedAt": "2020-01-28T07:24:34.178Z",
+                    "createdAt": "2020-01-28T07:24:34.178Z"
+                  },
+                  {
+                    "_id": "5e2fe1c1490973602066b032",
+                    "device_id": "abc123d",
+                    "name": "abcdef",
+                    "loc": "abcdef",
+                    "stat": {
+                      "opm": "0/1/2",
+                      "bat": "99",
+                      "opv": "220",
+                      "opp": "9999",
+                      "opc": "45.45",
+                      "chc": "888"
+                    },
+                    "time": "Wednesday 01.02.2020 -- 10:10:10",
+                    "__v": 0,
+                    "updatedAt": "2020-01-28T07:24:49.047Z",
+                    "createdAt": "2020-01-28T07:24:49.047Z"
+                  }
+                ]
+              }
+            },
+            "headers": {
+              "Server": {
+                "type": "string",
+                "default": "hardware-monitoring-api"
+              },
+              "Access-Control-Allow-Origin": {
+                "type": "string",
+                "default": "*"
+              },
+              "Access-Control-Allow-Credentials": {
+                "type": "string",
+                "default": "true"
+              },
+              "Access-Control-Allow-Method": {
+                "type": "string",
+                "default": "*"
+              },
+              "Connection": {
+                "type": "string",
+                "default": "Keep-Alive"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Tue, 28 Jan 2020 07:24:51 GMT"
+              },
+              "Request-Id": {
+                "type": "string",
+                "default": "edfdb41d-3ab4-4bcb-90f3-981e1afc812b"
+              },
+              "Response-Time": {
+                "type": "string",
+                "default": "26"
+              },
+              "Transfer-Encoding": {
+                "type": "string",
+                "default": "chunked"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notify": {
+      "post": {
+        "description": "",
+        "summary": "HARWARE POST ENDPOINT",
+        "operationId": "HARWAREPOSTENDPOINT",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/HARWAREPOSTENDPOINTREQUEST"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/HARWAREPOSTENDPOINT"
+            },
+            "examples": {
+              "application/json": {
+                "error": false,
+                "code": 200,
+                "message": "Request has successfully been saved",
+                "response": "Request notification sent to the dashboard"
+              }
+            },
+            "headers": {
+              "Server": {
+                "type": "string",
+                "default": "hardware-monitoring-api"
+              },
+              "Access-Control-Allow-Origin": {
+                "type": "string",
+                "default": "*"
+              },
+              "Access-Control-Allow-Credentials": {
+                "type": "string",
+                "default": "true"
+              },
+              "Access-Control-Allow-Method": {
+                "type": "string",
+                "default": "*"
+              },
+              "Connection": {
+                "type": "string",
+                "default": "Keep-Alive"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Tue, 28 Jan 2020 07:24:49 GMT"
+              },
+              "Request-Id": {
+                "type": "string",
+                "default": "f4167ef0-d283-4eef-b28d-0e3c4a9aeca1"
+              },
+              "Response-Time": {
+                "type": "string",
+                "default": "50"
+              },
+              "Transfer-Encoding": {
+                "type": "string",
+                "default": "chunked"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "FETCHALLHARDWAREPOSTREQUEST": {
+      "title": "FETCHALLHARDWAREPOSTREQUEST",
+      "example": {
+        "error": false,
+        "code": 200,
+        "message": "",
+        "response": [
+          {
+            "_id": "5e2fe1a9490973602066b023",
+            "device_id": "abc123",
+            "name": "abcdef",
+            "loc": "abcdef",
+            "stat": {
+              "opm": "0/1/2",
+              "bat": "99",
+              "opv": "220",
+              "opp": "9999",
+              "opc": "45.45",
+              "chc": "888"
+            },
+            "time": "Wednesday 01.02.2020 -- 10:10:10",
+            "__v": 0,
+            "updatedAt": "2020-01-28T07:24:34.178Z",
+            "createdAt": "2020-01-28T07:24:34.178Z"
+          },
+          {
+            "_id": "5e2fe1c1490973602066b032",
+            "device_id": "abc123d",
+            "name": "abcdef",
+            "loc": "abcdef",
+            "stat": {
+              "opm": "0/1/2",
+              "bat": "99",
+              "opv": "220",
+              "opp": "9999",
+              "opc": "45.45",
+              "chc": "888"
+            },
+            "time": "Wednesday 01.02.2020 -- 10:10:10",
+            "__v": 0,
+            "updatedAt": "2020-01-28T07:24:49.047Z",
+            "createdAt": "2020-01-28T07:24:49.047Z"
+          }
+        ]
+      },
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "boolean"
+        },
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "response": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Response"
+          }
+        }
+      },
+      "required": [
+        "error",
+        "code",
+        "message",
+        "response"
+      ]
+    },
+    "Response": {
+      "title": "Response",
+      "example": {
+        "_id": "5e2fe1a9490973602066b023",
+        "device_id": "abc123",
+        "name": "abcdef",
+        "loc": "abcdef",
+        "stat": {
+          "opm": "0/1/2",
+          "bat": "99",
+          "opv": "220",
+          "opp": "9999",
+          "opc": "45.45",
+          "chc": "888"
+        },
+        "time": "Wednesday 01.02.2020 -- 10:10:10",
+        "__v": 0,
+        "updatedAt": "2020-01-28T07:24:34.178Z",
+        "createdAt": "2020-01-28T07:24:34.178Z"
+      },
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "device_id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "loc": {
+          "type": "string"
+        },
+        "stat": {
+          "$ref": "#/definitions/Stat"
+        },
+        "time": {
+          "type": "string"
+        },
+        "__v": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "updatedAt": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "_id",
+        "device_id",
+        "name",
+        "loc",
+        "stat",
+        "time",
+        "__v",
+        "updatedAt",
+        "createdAt"
+      ]
+    },
+    "Stat": {
+      "title": "Stat",
+      "example": {
+        "opm": "0/1/2",
+        "bat": "99",
+        "opv": "220",
+        "opp": "9999",
+        "opc": "45.45",
+        "chc": "888"
+      },
+      "type": "object",
+      "properties": {
+        "opm": {
+          "type": "string"
+        },
+        "bat": {
+          "type": "string"
+        },
+        "opv": {
+          "type": "string"
+        },
+        "opp": {
+          "type": "string"
+        },
+        "opc": {
+          "type": "string"
+        },
+        "chc": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "opm",
+        "bat",
+        "opv",
+        "opp",
+        "opc",
+        "chc"
+      ]
+    },
+    "HARWAREPOSTENDPOINTREQUEST": {
+      "title": "HARWAREPOSTENDPOINTREQUEST",
+      "example": {
+        "device_id": "abc123d",
+        "name": "abcdef",
+        "loc": "abcdef",
+        "stat": {
+          "opm": "0/1/2",
+          "bat": "99",
+          "opv": "220",
+          "opp": "9999",
+          "opc": "45.45",
+          "chc": "888"
+        },
+        "time": "Wednesday 01.02.2020 -- 10:10:10"
+      },
+      "type": "object",
+      "properties": {
+        "device_id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "loc": {
+          "type": "string"
+        },
+        "stat": {
+          "$ref": "#/definitions/Stat"
+        },
+        "time": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "device_id",
+        "name",
+        "loc",
+        "stat",
+        "time"
+      ]
+    },
+    "HARWAREPOSTENDPOINT": {
+      "title": "HARWAREPOSTENDPOINT",
+      "example": {
+        "error": false,
+        "code": 200,
+        "message": "Request has successfully been saved",
+        "response": "Request notification sent to the dashboard"
+      },
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "boolean"
+        },
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "response": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "error",
+        "code",
+        "message",
+        "response"
+      ]
+    }
+  },
+  "tags": []
+}

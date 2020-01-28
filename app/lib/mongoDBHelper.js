@@ -28,17 +28,14 @@ class MongoDBHelper {
    * @returns {Promise}
    */
   save(data) {
-    console.log(data);
-    return new Promise((resolve, reject) => {
-      const mongodbSaveSchema = this.MongoDBModel({ device_id: data.device_id, data });
-      return mongodbSaveSchema.save((error, result) => {
-        console.log(error);
+    return new Promise((resolve, reject) =>
+      // const mongodbSaveSchema = this.MongoDBModel(data, { upsert: true });
+      this.MongoDBModel.replaceOne({ device_id: data.device_id }, data, { upsert: true }, (error, result) => {
         if (error != null) {
           return reject(MongoDBHelper.handleError(error));
         }
         return resolve(result);
-      });
-    });
+      }));
   }
 
   /**

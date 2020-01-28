@@ -31,7 +31,7 @@ class Hardware {
   getRecord(data) {
     if (data.device_id) {
       return this.mongo.getOne(data);
-    } console.log('got here'); return this.mongo.getBulk();
+    } return this.mongo.getBulk();
   }
 
   createRecord(data) {
